@@ -1,0 +1,7 @@
+{% extends "scodds/layout.html" %}
+{%block body%}
+	<h2>Player Name: {{player.name}}</h2>
+	<h2>Player Rating: {{player.rating}}</h2>
+
+	<a href ="{% url 'index' %}">back to homepage</a>
+{% endblock %}
