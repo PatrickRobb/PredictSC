@@ -2,12 +2,14 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Player, Matchup
 from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 # from django.views.generic.detail import DetailView
 # from django.views.generic.create import CreateView
 # Create your views here.
+
 def index(request):
 	return render(request, "scodds/index.html", {
-		"matchups": Matchup.objects.all()
+		"matchups": Matchup.objects.order_by('-dateCreated')
 		})
 
 class MatchupListView(ListView):
@@ -16,6 +18,7 @@ class MatchupListView(ListView):
     paginate_by = 100  # if pagination is desired
     template_name = 'scodds/index.html'
     context_object_name = 'matchups'
+    oddering = ['-dateCreated']
 
 class MatchupDetailView(DetailView):
 
@@ -23,9 +26,9 @@ class MatchupDetailView(DetailView):
     template_name = 'scodds/matchup.html'
     context_object_name = 'matchup'
 
-class MatchupCreateView(CreateView):
+class MatchupCreateView(LoginRequiredMixin, CreateView):
 	model = Matchup
-	fields =['player1', 'player2', 'p1Odds', 'dateCreated']
+	fields =['player1', 'player2', 'p1Odds',]
 
 class PlayerListView(ListView):
 

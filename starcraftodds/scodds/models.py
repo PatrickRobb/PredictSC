@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import Model
 from django.utils.timezone import now
+from django.urls import reverse
 
 # Create your models here.
 class Player(models.Model):
@@ -15,6 +16,9 @@ class Matchup(models.Model):
 	player2 = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="player2")
 	p1Odds = models.IntegerField()
 	dateCreated = models.DateTimeField(default=now, editable=False)
+
+	def get_absolute_url(self):
+		return reverse('matchup', kwargs={'pk': self.pk})
 
 
 	def __str__(self):
