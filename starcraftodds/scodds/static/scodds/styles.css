@@ -12,6 +12,10 @@ body{
     font-size: large;
 }
 
+.centered{
+  text-align: center;
+}
+
 html,body {
   height: 100%;
 }
@@ -34,6 +38,17 @@ html,body {
   width: 125px;
   margin-right: 20px;
   margin-bottom: 16px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
 }
 
 .account-heading {

@@ -41,23 +41,63 @@
 
 
 {% block body %}
-<div class="row">
-      <div class = "col-md-12">
-          <h1>Recent Matchups:</h1>
-          <ul>
-            {% for matchup in matchups %}
-              <li>
-                <a href="{% url 'matchup' matchup.id %}">
-                {{matchup}}
-              </a>
-            </li>
-            {% endfor %}
-          </ul>
-          <button type = "button" class = "btn btn-primary">Button1</button>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h1 class="centered">Upcoming Matchups</h1>
+         <table>
+                 <tr>
+                   <th>Match Date</th>
+                   <th>Player 1</th>
+                   <th>Player 2</th>
+                   <th>Best of</th>
+                   <th>Given odds for P1</th>
+                   <th>Rating based odds for P1</th>
+                   <th>Kelly Criterion Value</th>
+                 </tr>
+                 {% for matchup in futureMatches %}
+                 <tr>
+                   <td>{{matchup.matchupDate}}</td>
+                   <td><a href="{% url 'player' matchup.player1.id %}">{{matchup.player1.name}}</a></td>
+                   <td><a href="{% url 'player' matchup.player2.id %}">{{matchup.player2.name}}</a></td>
+                   <td>{{matchup.bestOf}}</td>
+                   <td>{{matchup.p1Odds|floatformat:2}}%</td>
+                   <td>{{matchup.p1AligulacOdds|floatformat:2}}%</td>
+                   <td>{{matchup.kellyValue|floatformat:2}}</td>
+                 </tr>
+                 {% endfor %}
+               </table>
+  </div>
+    
+    <div class = "col-md-6">
+        <h1 class="centered">Recent Matchups</h1>
 
-        </div>
-        <!-- <div class = "col-xs-4">
-          <button type = "button" class = "btn btn-success">Button2</button>
+          <table>
+            <tr>
+              <th>Match Date</th>
+              <th>Player 1</th>
+              <th>Player 2</th>
+              <th>Best of</th>
+              <th>Given odds for P1</th>
+              <th>Rating based odds for P1</th>
+              <th>Kelly Criterion Value</th>
+            </tr>
+            {% for matchup in pastMatches %}
+            <tr>
+              <td>{{matchup.matchupDate}}</td>
+              <td><a href="{% url 'player' matchup.player1.id %}">{{matchup.player1.name}}</a></td>
+              <td><a href="{% url 'player' matchup.player2.id %}">{{matchup.player2.name}}</a></td>
+              <td>{{matchup.bestOf}}</td>
+              <td>{{matchup.p1Odds|floatformat:2}}%</td>
+              <td>{{matchup.p1AligulacOdds|floatformat:2}}%</td>
+              <td>{{matchup.kellyValue|floatformat:2}}</td>
+            </tr>
+            {% endfor %}
+          </table>
+     </div>
+     <!-- <div class = "col-xs-4">
+        <button type = "button" class = "btn btn-success">Button2</button>
         </div> -->
-      </div>
+  </div>
+</div>
 {% endblock %}

@@ -1,7 +1,40 @@
 {% extends "scodds/layout.html" %}
 {%block body%}
 	<h2>Player Name: {{player.name}}</h2>
-	<h2>Player Rating: {{player.rating}}</h2>
+	<h2>Nationality: {{player.country}}</h2>
 
-	<a href ="{% url 'index' %}">back to homepage</a>
+	<h3>Recent matchups involving {{player.name}}</h3>
+		<table>
+            <tr>
+              <th>Match Date</th>
+              <th>Player 1</th>
+              <th>Player 2</th>
+              <th>Best of</th>
+              <th>Given odds for P1</th>
+              <th>Rating based odds for P1</th>
+              <th>Kelly Criterion Value</th>
+            </tr>
+            {% for matchup in player_matches_1 %}
+            <tr>
+              <td>{{matchup.matchupDate}}</td>
+              <td><a href="{% url 'player' matchup.player1.id %}">{{matchup.player1.name}}</a></td>
+              <td><a href="{% url 'player' matchup.player2.id %}">{{matchup.player2.name}}</a></td>
+              <td>{{matchup.bestOf}}</td>
+              <td>{{matchup.p1Odds|floatformat:2}}%</td>
+              <td>{{matchup.p1AligulacOdds|floatformat:2}}%</td>
+              <td>{{matchup.kellyValue|floatformat:2}}</td>
+            </tr>
+            {% endfor %}
+			{% for matchup in player_matches_2 %}
+            <tr>
+              <td>{{matchup.matchupDate}}</td>
+              <td><a href="{% url 'player' matchup.player1.id %}">{{matchup.player1.name}}</a></td>
+              <td><a href="{% url 'player' matchup.player2.id %}">{{matchup.player2.name}}</a></td>
+              <td>{{matchup.bestOf}}</td>
+              <td>{{matchup.p1Odds|floatformat:2}}%</td>
+              <td>{{matchup.p1AligulacOdds|floatformat:2}}%</td>
+              <td>{{matchup.kellyValue|floatformat:2}}</td>
+            </tr>
+            {% endfor %}
+          </table>
 {% endblock %}
