@@ -118,4 +118,6 @@ p {
 
 .kelly-pic{
   padding: 15px;
+  max-width: 100%;
+  height: auto;
 }
