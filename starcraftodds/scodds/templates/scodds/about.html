@@ -1,0 +1,30 @@
+{% extends "scodds/layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="col-md-2"></div>
+<div class="col-md-8 about-content">
+    <h2 class="text-center text-indent">What is the Kelly Criterion and what is this website all about?</h2>
+    <p>     This website is a tool to be used for Starcraft 2 Fantasy league or sports betting
+        purposes. It takes a set of "odds" for a matchup between two Starcraft players, 
+        queries API for Aligulac, the most used Starcraft 2 progamer player rating database,
+        retrieves the expected win rate for player A in the matchup, and uses the Kelly
+        Criterion formula to determine the optimal % of your bankroll to be bet on player A 
+        (a negative Kelly value indicates you should skip the opportunity). The
+        ratings provided by Aligulac are just estimations, so this is a tool only to compliment 
+        your normal decision making process.
+    </p>
+    
+    <p>
+            The Kelly Criterion is a mathematical formula used in multi-stage investing 
+        and sportsbetting situations which determines the optimal percentage of your "bankroll" 
+        to wager on a particular opportunity. When a +EV (expected value) opportunity
+        is available to you, it's clear that you should risk SOME of your bankroll on the opportunity,
+        but it's not obvious what the optimal percentage of the bankroll to be risked is. The Kelly Criterion 
+        takes into account the expected return rate, and a rate of success projection, and returns 
+        the optimal percentage of your bankroll to spend. 
+    </p>
+    <img class = "kelly-pic" src="{% static '/images/kellycriterion.png' %}">
+</div>
+<div class="col-md-2"></div>
+{% endblock %}

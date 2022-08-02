@@ -1,11 +1,22 @@
 {% extends "scodds/layout.html" %}
+{% load static %}
 {%block body%}
-	<ol>
+<table class="content-table">
+	<caption class="text-center">Players List</caption>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Full Name</th>
+			<th>Country</th>
+		</tr>
+	</thead>
 	{% for player in players %}
-		<li>
-		<a href="{% url 'player' player.id %}">{{player}}</a>
-		</li>
+	<tr>
+		<td><a href="{% url 'player' player.id %}">{{player.name}}</a></td>
+		<td>{{player.full_name}}</td>
+		<td>{{player.country}}</td>
+	</tr>
 	{% endfor %}
-	</ol>
-	<a href ="{% url 'index' %}">back to homepage</a>
+</table>
 {% endblock %}
+
